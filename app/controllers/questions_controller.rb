@@ -1,15 +1,24 @@
 class QuestionsController < ApplicationController
     before_action :set_question, only: [:show,:edit,:update,:destroy]
-    
+    before_action :require_student, except: [:show, :index]
+    before_action :require_same_student, only: [ :destroy]
     def show
        
     end
     def index
         @questions = Question.paginate(page: params[:page], per_page: 3)
     end
+    def index1
+        if session[:student_id]
+           @questions = Question.where(student_id:session[:student_id]).paginate(page: params[:page], per_page: 3)
+        else
+            flash[:alert] = "You have to login to view your questions"
+            redirect_to login_path
+        end
+    end
     def create
         @question = Question.new(question_params)
-        #@question.user = current_user
+        @question.student = current_student
         if @question.save 
             flash[:notice] = "Question posted Successfully"
             redirect_to @question
@@ -22,7 +31,6 @@ class QuestionsController < ApplicationController
         
     end
     def update
-        
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"
             redirect_to @question
@@ -34,7 +42,6 @@ class QuestionsController < ApplicationController
         @question = Question.new
     end
     def destroy
-        
         @question.destroy
         redirect_to questions_path
     end
@@ -47,6 +54,13 @@ class QuestionsController < ApplicationController
 
     def question_params
         params.require(:question).permit(:que,:ans)
+    end
+
+    def require_same_student
+        if current_student != @question.student
+            flash[:alert] = "You can only delete your own question"
+            redirect_to @question
+        end
     end
 
 end

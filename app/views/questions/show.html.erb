@@ -5,14 +5,29 @@
         <div class="col-8 mt-4">
             <div class="card text-center shadow mb-5 bg-white rounded">
                 <div class="card-header font-italic">
-                    by  Sarath Chandra 
+                    by  <%= @question.student.name %>
                 </div>
                 <div class="card-body">
-                    <div class="card-text text-left"><%= simple_format(@question.ans) %></div>
-                    <%= link_to 'Edit', edit_question_path(@question), class: "btn btn-outline-info"%>
-                    <%= link_to 'Delete', question_path(@question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
+
+                    <div class="card-text text-left">
+                        <% if @question.ans.nil? %>
+                           Not answerd yet!!
+                        <% else %>
+                            <%= simple_format(@question.ans) %>
+                        <% end %>
+                    </div>
+                    <% if @question.ans.nil? %>
+                        <%= link_to 'Answer it', edit_question_path(@question), class: "btn btn-outline-info"%>
+                    <% end %>
+                    <% if logged_in_as_student? && current_student==@question.student %>
+                        <%= link_to 'Delete', question_path(@question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
+                    <% end %>
                 </div>
-                <div class="card-footer text-muted">
+                <% if @question.ans.nil? %>
+                    <div class="card-footer bg-danger  text-black">
+                <% else %>
+                    <div class="card-footer bg-success  text-black">
+                <% end %>
                     <small> posted <%=time_ago_in_words(@question.created_at) %> ago,
                     updated <%=time_ago_in_words(@question.updated_at)%> ago
                     </small>
