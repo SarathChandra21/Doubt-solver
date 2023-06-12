@@ -3,8 +3,15 @@
         <div class="row justify-content-md-center">
             <div class="col-8 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
+                    <div class="card-header font-italic">
+                        Asked by  <%= question.student.name %>
+                    </div>
+                    <% if !question.ans.nil? %>
+                        <div class="card-header font-italic">
+                            Solved by  <%= question.teacher.name %>
+                        </div>
+                    <% end %>
                     <div class="card-body">
-                        Asked by <%= question.student.name if question.student %>
                         <h5 class="card-title"><%= link_to question.que, question_path(question), class: "text-success" %></h5>
                         <p class="card-text">
                         <% if question.ans.nil? %>
@@ -14,7 +21,7 @@
                         <% end %>
                         </p>
                         <%= link_to 'View', question_path(question), class: "btn btn-outline-success"%>
-                        <% if question.ans.nil? %>
+                        <% if question.ans.nil? && logged_in_as_teacher? %>
                             <%= link_to 'Answer it!', edit_question_path(question), class: "btn btn-outline-info"%>
                         <% end %>
                         <% if logged_in_as_student? && current_student == question.student %>

@@ -5,8 +5,13 @@
         <div class="col-8 mt-4">
             <div class="card text-center shadow mb-5 bg-white rounded">
                 <div class="card-header font-italic">
-                    by  <%= @question.student.name %>
+                    Asked by  <%= @question.student.name %>
                 </div>
+                <% if !@question.ans.nil? %>
+                    <div class="card-header font-italic">
+                        Solved by  <%= @question.teacher.name %>
+                    </div>
+                <% end %>
                 <div class="card-body">
 
                     <div class="card-text text-left">
@@ -16,8 +21,11 @@
                             <%= simple_format(@question.ans) %>
                         <% end %>
                     </div>
-                    <% if @question.ans.nil? %>
+                    <% if @question.ans.nil? && logged_in_as_teacher?%>
                         <%= link_to 'Answer it', edit_question_path(@question), class: "btn btn-outline-info"%>
+                    <% end %>
+                    <% if !@question.ans.nil? && (logged_in_as_teacher? && current_teacher==@question.teacher) %>
+                        <%= link_to 'Edit your answer', edit_question_path(@question), class: "btn btn-outline-info"%>
                     <% end %>
                     <% if logged_in_as_student? && current_student==@question.student %>
                         <%= link_to 'Delete', question_path(@question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     before_action :set_question, only: [:show,:edit,:update,:destroy]
-    before_action :require_student, except: [:show, :index]
+    before_action :require_student, except: [:show, :index, :edit, :update]
     before_action :require_same_student, only: [ :destroy]
     def show
        
@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
     def create
         @question = Question.new(question_params)
         @question.student = current_student
+        @question.teacher = Teacher.first
         if @question.save 
             flash[:notice] = "Question posted Successfully"
             redirect_to @question
@@ -31,7 +32,7 @@ class QuestionsController < ApplicationController
         
     end
     def update
-        #@question.teacher = current_teacher
+        @question.teacher = current_teacher
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"
             redirect_to @question
