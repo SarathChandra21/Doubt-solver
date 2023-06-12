@@ -31,6 +31,7 @@ class QuestionsController < ApplicationController
         
     end
     def update
+        #@question.teacher = current_teacher
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"
             redirect_to @question

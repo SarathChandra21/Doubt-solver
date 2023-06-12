@@ -1,13 +1,12 @@
-<h1 class="text-center mt-4"><%= @student.name%> profile</h1>
+<h1 class="text-center mt-4"><%= @teacher.name%> profile</h1>
 
-
-<% if logged_in_as_student? && current_student == @student %>
+<% if logged_in_as_teacher? && current_teacher == @teacher %>
     <div class="text-center mt-4">
-        <%= link_to "Edit your profile", edit_student_path(@student), class: "btn btn-outline-info" %>
+        <%= link_to "Edit your profile", edit_teacher_path(@teacher), class: "btn btn-outline-info" %>
     </div>
 <% end %>
 
-<h3 class="text-center mt-4">Questions Asked</h3>
+<h3 class="text-center mt-4">Questions Solved</h3>
 
 <div class="flickr_pagination">
     <%= will_paginate @questions, :container => false %>

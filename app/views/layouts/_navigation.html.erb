@@ -10,7 +10,10 @@
         <%= link_to 'Home', root_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <%= link_to 'Students', students_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Teachers', teachers_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,13 +41,39 @@
           <li class="nav-item">
               <%= link_to "Logout", logout_path, class: "nav-link", method: :delete%>
           </li>
+      <% elsif logged_in_as_teacher? %>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  (Teacher) <%= current_teacher.name %>
+              </a>    
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to 'View profile', teacher_path(current_teacher), class: "dropdown-item" %>
+                  <%= link_to 'Edit profile', edit_teacher_path(current_teacher), class: "dropdown-item" %>
+                  <%= link_to 'Delete profile', teacher_path(current_teacher), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?"}%>
+              </div>
+          </li>
+          <li class="nav-item">
+              <%= link_to "Logout", logout_path, class: "nav-link", method: :delete%>
+          </li>
       <% else %>
-            <li class="nav-item">
-                <%= link_to "Login", login_path, class: "nav-link"%>
-            </li>
-            <li class="nav-item">
-                <%= link_to "Signup", signup1_path, class: "nav-link"%>
-            </li>       
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Login
+              </a>    
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to 'Login as student', login_path , class: "dropdown-item" %>
+                  <%= link_to 'Login as teacher', login2_path, class: "dropdown-item" %>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  SignUp
+              </a>    
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to 'Signup as student', signup1_path , class: "dropdown-item" %>
+                  <%= link_to 'Signup as teacher', signup2_path, class: "dropdown-item" %>
+              </div>
+          </li>     
       <% end %>
     </ul>
     <form class="form-inline my-2 my-lg-0">
