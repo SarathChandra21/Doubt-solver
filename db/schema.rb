@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_12_115147) do
+ActiveRecord::Schema.define(version: 2023_06_13_062743) do
 
   create_table "questions", force: :cascade do |t|
     t.text "que"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_115147) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
     t.integer "teacher_id"
+    t.integer "notify_me", default: 0
   end
 
   create_table "students", force: :cascade do |t|

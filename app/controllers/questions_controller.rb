@@ -55,7 +55,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-        params.require(:question).permit(:que,:ans)
+        params.require(:question).permit(:que,:ans,:notify_me)
     end
 
     def require_same_student
