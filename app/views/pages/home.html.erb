@@ -3,5 +3,10 @@
         <h1 class="display-4">Doubts Solver</h1>
         <p class="lead">Got stuck at a question! No problem, Ask our mentors and get solutions.</p>
         <hr class="my-4">
+        <br> <br> <br>
+        <% if !(logged_in_as_student? || logged_in_as_teacher?) %>
+            <%= link_to "Sign up as student", signup1_path, class: "btn btn-warning btn-lg mr-4"%>
+            <%= link_to "Sign up as teacher", signup2_path, class: "btn btn-success btn-lg ml-4"%>
+        <% end %>
     </div>
 </div>
