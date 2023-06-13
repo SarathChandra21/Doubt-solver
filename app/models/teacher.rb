@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
     before_save { self.email = email.downcase }
-    has_many :questions, dependent: :destroy
+    has_many :questions 
     validates :name, presence: true, 
                      uniqueness: { case_sensitive: false }, 
                      length: {minimum: 3, maximum: 25}

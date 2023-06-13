@@ -1,19 +1,15 @@
 <div class="container">
     <% @questions.each do |question| %>
+        <% if !question.ans.nil? %>
         <div class="row justify-content-md-center">
             <div class="col-8 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
                     <div class="card-header font-italic">
                         Asked by  <%= question.student.name %>
                     </div>
-                    <% if !question.ans.nil? && question.teacher%>
+                    <% if !question.ans.nil? %>
                         <div class="card-header font-italic">
                             Solved by  <%= question.teacher.name %>
-                        </div>
-                    <% end %>
-                    <% if !question.ans.nil? && !question.teacher%>
-                        <div class="card-header font-italic">
-                            Solved by  Deleted User
                         </div>
                     <% end %>
                     <div class="card-body">
@@ -45,6 +41,7 @@
                 </div>
             </div>
         </div>
+        <% end %>
     <% end%>
 </div>
 

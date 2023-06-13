@@ -7,9 +7,14 @@
                 <div class="card-header font-italic">
                     Asked by  <%= @question.student.name %>
                 </div>
-                <% if !@question.ans.nil? %>
+                <% if !@question.ans.nil? && @question.teacher%>
                     <div class="card-header font-italic">
                         Solved by  <%= @question.teacher.name %>
+                    </div>
+                <% end %>
+                <% if !@question.ans.nil? && !@question.teacher%>
+                    <div class="card-header font-italic">
+                        Solved by  Deleted User
                     </div>
                 <% end %>
                 <div class="card-body">
