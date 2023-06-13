@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get 'login2', to: 'sessions#new2'
   post 'login2', to: 'sessions#create2'
   delete 'logout2', to: 'sessions#destroy2'
+  resources :topics, except: [:destroy]
 end

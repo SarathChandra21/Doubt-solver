@@ -1,0 +1,19 @@
+<h1 class="text-center mt-4"><%= @topic.name%> </h1>
+
+<% if logged_in_as_student? && current_student.admin? %>
+    <div class="text-center mt-4">
+        <%= link_to "Edit topic name", edit_topic_path(@topic), class: "btn btn-outline-info" %>
+    </div>
+<% end %>
+
+<h4 class="text-center mt-4">Question related to this topic</h4>
+
+<div class="flickr_pagination">
+    <%= will_paginate @questions, :container => false %>
+</div>
+
+<%= render 'questions/question' %>
+
+<div class="flickr_pagination mb-4">
+    <%= will_paginate @questions, :container => false %>
+</div>

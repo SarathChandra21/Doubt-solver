@@ -16,7 +16,7 @@
                         
                         <p class="card-text"><%= pluralize(student.questions.count, "question") %> asked</p>
                         <%= link_to 'View profile', student_path(student), class: "btn btn-outline-success"%>
-                        <% if logged_in_as_student? && current_student == student %>
+                        <% if logged_in_as_student? && (current_student == student || current_student.admin?)%>
                             <%= link_to 'Edit profile', edit_student_path(student), class: "btn btn-outline-info"%>
                             <%= link_to 'Delete profile', student_path(student), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
                         <% end %>

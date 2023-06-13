@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-        params.require(:question).permit(:que,:ans,:notify_me)
+        params.require(:question).permit(:que,:ans,:notify_me,topic_ids: [])
     end
 
     def require_same_student

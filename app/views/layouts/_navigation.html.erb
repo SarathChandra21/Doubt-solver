@@ -24,13 +24,29 @@
             <%= link_to 'Ask a question', new_question_path, class: "dropdown-item" %>
             <%= link_to 'List my questions', myquestions_path, class: "dropdown-item" %>
           <% end %>
+          <%= link_to 'List topicwise questions', topics_path, class: "dropdown-item" %>
           <%= link_to 'List all questions', questions_path, class: "dropdown-item" %>
         </div>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Topics
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if logged_in_as_student? && current_student.admin?%>
+                  <%= link_to 'Create a new topic', new_topic_path, class: "dropdown-item" %>
+              <% end %>
+              <%= link_to 'View topics', topics_path, class: "dropdown-item" %>
+          </div>
       </li>
       <% if logged_in_as_student? %>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <% if current_student.admin? %>
+                   (Admin) <%= current_student.name %>
+                <% else %>
                    (Student) <%= current_student.name %>
+                <% end %>
               </a>    
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to 'View profile', student_path(current_student), class: "dropdown-item" %>
@@ -67,7 +83,7 @@
           </li>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  SignUp
+                  Signup
               </a>    
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <%= link_to 'Signup as student', signup1_path , class: "dropdown-item" %>

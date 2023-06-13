@@ -6,19 +6,19 @@
             <div class="card text-center shadow mb-5 bg-white rounded">
                 <div class="card-header font-italic">
                     Asked by  <%= @question.student.name %>
+                
+                    <% if !@question.ans.nil? && @question.teacher%>
+                            Solved by  <%= @question.teacher.name %>
+                    <% end %>
+                    <% if !@question.ans.nil? && !@question.teacher%>
+                            Solved by  Deleted User
+                    <% end %>
+                    <% if @question.topics.any? %>
+                        Related topics <div class="mt-2"><%= render @question.topics %></div>
+                    <% end %>
                 </div>
-                <% if !@question.ans.nil? && @question.teacher%>
-                    <div class="card-header font-italic">
-                        Solved by  <%= @question.teacher.name %>
-                    </div>
-                <% end %>
-                <% if !@question.ans.nil? && !@question.teacher%>
-                    <div class="card-header font-italic">
-                        Solved by  Deleted User
-                    </div>
-                <% end %>
                 <div class="card-body">
-
+                
                     <div class="card-text text-left">
                         <% if @question.ans.nil? %>
                            Not answerd yet!!
@@ -26,6 +26,7 @@
                             <%= simple_format(@question.ans) %>
                         <% end %>
                     </div>
+                    <hr>
                     <% if @question.ans.nil? && logged_in_as_teacher?%>
                         <%= link_to 'Answer it', edit_question_path(@question), class: "btn btn-outline-info"%>
                     <% end %>
@@ -33,7 +34,7 @@
                         <%= link_to 'Edit your answer', edit_question_path(@question), class: "btn btn-outline-info"%>
                     <% end %>
                     <% if logged_in_as_student? && current_student==@question.student %>
-                        <%= link_to 'Delete', question_path(@question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
+                        <%= link_to 'Delete this question', question_path(@question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
                     <% end %>
                 </div>
                 <% if @question.ans.nil? %>
