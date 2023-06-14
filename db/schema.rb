@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_13_110748) do
+ActiveRecord::Schema.define(version: 2023_06_14_095731) do
 
   create_table "question_topics", force: :cascade do |t|
     t.integer "question_id"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 2023_06_13_110748) do
     t.integer "student_id"
     t.integer "teacher_id"
     t.integer "notify_me", default: 0
+  end
+
+  create_table "student_topics", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "topic_id"
   end
 
   create_table "students", force: :cascade do |t|

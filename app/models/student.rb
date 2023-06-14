@@ -1,6 +1,8 @@
 class Student < ApplicationRecord
     before_save { self.email = email.downcase }
     has_many :questions, dependent: :destroy
+    has_many :student_topics
+    has_many :topics, through: :student_topics
     validates :name, presence: true, 
                      uniqueness: { case_sensitive: false }, 
                      length: {minimum: 3, maximum: 25}

@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"
             if @question.notify_me == 1
-                SendNotificationMailer.send_email(Student.find(@question.student_id)).deliver_now
+                SendNotificationMailer.send_email(@question).deliver_now
             end
             redirect_to @question
         else

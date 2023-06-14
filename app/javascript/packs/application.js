@@ -19,3 +19,6 @@ require("channels")
 import "bootstrap"
 
 import "chartkick/chart.js"
+
+import $ from 'jquery';
+global.$ = global.jQuery = $;

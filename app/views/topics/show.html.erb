@@ -5,6 +5,14 @@
         <%= link_to "Edit topic name", edit_topic_path(@topic), class: "btn btn-outline-info" %>
     </div>
 <% end %>
+<% if logged_in_as_student? %>
+
+    <div class="container text-center">
+        <% x =  StudentTopic.find_by(student_id: current_student.id, topic_id: @topic.id).nil? ? "Follow" : "Unfollow"%>
+        <%= link_to x, { controller: 'pages', action: 'update', remote: true, s_id: current_student.id, t_id: @topic.id }, class: "btn btn-primary", id: "follow-btn" %>
+    </div>
+    
+<% end %>
 
 <h4 class="text-center mt-4">Question related to this topic</h4>
 

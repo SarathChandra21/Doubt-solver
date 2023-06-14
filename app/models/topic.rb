@@ -3,4 +3,6 @@ class Topic < ApplicationRecord
     validates_uniqueness_of :name
     has_many :question_topics
     has_many :questions, through: :question_topics
+    has_many :student_topics
+    has_many :students, through: :student_topics
 end
