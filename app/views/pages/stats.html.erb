@@ -1,18 +1,20 @@
 <div class="container" id="home-container">
-    <div class="text-center t">
+    <div class="text-center container">
         <h3>Statistics of students registered to our app</h3>
         <%= line_chart Student.group_by_day(:created_at).count %>
     </div>
-
-    <div class="text-center ">
+    <br> <br> <br>
+    <div class="text-center container ">
         <h3>Statistics of teachers registered to our app</h3>
         <%= line_chart Teacher.group_by_day(:created_at).count %>
     </div>
-    <div class="text-center ">
+    <br> <br> <br>
+    <div class="text-center container">
         <h3>Day wise questions asked by students</h3>
         <%= line_chart Question.group_by_day(:created_at).count %>
     </div>
-    <div class="text-center ">
+    <br> <br> <br>
+    <div class="text-center container">
         <h3>Day wise questions solved by teachers</h3>
         <%= line_chart Question.group_by_day(:updated_at).count %>
     </div>

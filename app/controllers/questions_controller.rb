@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
     before_action :set_question, only: [:show,:edit,:update,:destroy]
     before_action :require_student, except: [:show, :index, :edit, :update]
+    before_action :require_teacher, only: [:edit,:update]
     before_action :require_same_student, only: [ :destroy]
     def show
        
@@ -29,7 +30,6 @@ class QuestionsController < ApplicationController
         
     end
     def edit
-        
     end
     def update
         @question.teacher = current_teacher

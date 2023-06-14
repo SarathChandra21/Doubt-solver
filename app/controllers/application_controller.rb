@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
     def require_student
         if !logged_in_as_student? 
-            flash[:alert] = "You must be logged in to perform that action"
+            flash[:alert] = "You must be logged in as student to perform that action"
             redirect_to login_path
         end
     end
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     def require_teacher
         if !logged_in_as_teacher? 
-            flash[:alert] = "You must be logged in to perform that action"
+            flash[:alert] = "You must be logged in as teacher to perform that action"
             redirect_to login2_path
         end
     end
