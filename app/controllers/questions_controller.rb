@@ -47,6 +47,7 @@ class QuestionsController < ApplicationController
         @question = Question.new
     end
     def destroy
+        
         @question.destroy
         redirect_to questions_path
     end
@@ -60,7 +61,7 @@ class QuestionsController < ApplicationController
     def question_params
         params.require(:question).permit(:que,:ans,:notify_me,topic_ids: [])
     end
-
+    
     def require_same_student
         if current_student != @question.student
             flash[:alert] = "You can only delete your own question"

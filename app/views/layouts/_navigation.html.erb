@@ -39,6 +39,7 @@
               <%= link_to 'View topics', topics_path, class: "dropdown-item" %>
           </div>
       </li>
+      
       <% if logged_in_as_student? %>
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,6 +50,9 @@
                 <% end %>
               </a>    
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <% if current_student.admin? %>
+                    <%= link_to 'View Dashboard', dashboard_path, class: "dropdown-item" %>
+                  <% end %>
                   <%= link_to 'View profile', student_path(current_student), class: "dropdown-item" %>
                   <%= link_to 'Edit profile', edit_student_path(current_student), class: "dropdown-item" %>
                   <%= link_to 'Delete profile', student_path(current_student), class: "dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?"}%>

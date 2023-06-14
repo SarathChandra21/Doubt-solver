@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate', '~> 3.1.0'
 
+gem 'chartkick'
+gem 'groupdate'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
