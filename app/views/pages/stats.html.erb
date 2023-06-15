@@ -1,21 +1,33 @@
 <div class="container" id="home-container">
-    <div class="text-center container">
-        <h3>Statistics of students registered to our app</h3>
-        <%= line_chart Student.group_by_day(:created_at).count %>
+    <div class="row">
+        <div class="col-6 text-center">
+            <h3>Statistics of students registered</h3>
+            <%= line_chart Student.group_by_day(:created_at).count %>
+        </div>
+        <div class="col-6 text-center">
+            <h3>Statistics of teachers registered</h3>
+            <%= line_chart Teacher.group_by_day(:created_at).count %>
+        </div>
     </div>
-    <br> <br> <br>
-    <div class="text-center container ">
-        <h3>Statistics of teachers registered to our app</h3>
-        <%= line_chart Teacher.group_by_day(:created_at).count %>
+    
+    <div class="row mt-5">
+        <div class="col-6 text-center">
+            <h3>Day wise questions asked by students</h3>
+            <%= line_chart Question.group_by_day(:created_at).count %>
+        </div>
+
+        <div class="col-6 text-center">
+            <h3>Day wise questions solved by teachers</h3>
+            <%= line_chart Question.group_by_day(:updated_at).count %>
+        </div>
+
     </div>
-    <br> <br> <br>
-    <div class="text-center container">
-        <h3>Day wise questions asked by students</h3>
-        <%= line_chart Question.group_by_day(:created_at).count %>
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h3>Topic wise questions asked</h3>
+            <%= pie_chart Topic.joins(:question_topics).group(:name).count %>
+        </div>
     </div>
-    <br> <br> <br>
-    <div class="text-center container">
-        <h3>Day wise questions solved by teachers</h3>
-        <%= line_chart Question.group_by_day(:updated_at).count %>
-    </div>
+    
+    
 </div>

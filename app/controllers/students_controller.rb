@@ -51,7 +51,13 @@ class StudentsController < ApplicationController
     end
 
     def set_student
-        @student = Student.find(params[:id])
+        if Student.where(id:params[:id]) == []
+            flash[:alert] = "Oops, the account was deleted."
+            redirect_to students_path
+        else
+            @student = Student.find(params[:id])
+        end
+        
     end
 
     def require_same_student

@@ -3,6 +3,6 @@ class SendNotificationMailer < ApplicationMailer
         @question = question
         @student = Student.find(@question.student_id)
         @teacher = Teacher.find(@question.teacher_id)
-        mail to: s@student.email , subject: "Question answered"
+        mail to: @student.email , subject: "Question answered"
     end
 end

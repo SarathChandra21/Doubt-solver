@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
     end
     def edit
     end
-    def update
+    def update 
         @question.teacher = current_teacher
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"
@@ -55,7 +55,12 @@ class QuestionsController < ApplicationController
     private
 
     def set_question
-        @question = Question.find(params[:id])
+        if Question.where(id:params[:id]) == []
+            flash[:alert] = "Oops the question was deleted by the student!!!"
+            redirect_to questions_path
+        else
+            @question = Question.find(params[:id])
+        end
     end
 
     def question_params

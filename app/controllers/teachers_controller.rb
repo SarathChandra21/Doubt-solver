@@ -51,7 +51,12 @@ class TeachersController < ApplicationController
     end
 
     def set_teacher
-        @teacher = Teacher.find(params[:id])
+        if Teacher.where(id:params[:id]) == []
+            flash[:alert] = "Oops the account was deleted"
+            redirect_to teachers_path
+        else
+            @teacher = Teacher.find(params[:id])
+        end
     end
 
     def require_same_teacher

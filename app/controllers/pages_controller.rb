@@ -1,5 +1,10 @@
 class PagesController < ApplicationController
     def home
+        if logged_in_as_student?
+            t = StudentTopic.where(student_id:current_student.id).pluck(:topic_id)
+            q = QuestionTopic.where(topic_id:t).pluck(:question_id)
+            @questions = Question.where(id:q).paginate(page: params[:page], per_page: 3)
+        end
     end
     def stats
     end

@@ -14,10 +14,7 @@ Rails.application.routes.draw do
   delete 'logout2', to: 'sessions#destroy2'
   resources :topics, except: [:destroy]
   get 'dashboard', to: "pages#stats"
-  get 'pages/follow'=>"pages#follow"
-  get 'pages/unfollow'=>"pages#unfollow"
   get 'pages/update', to: 'pages#update'
   
-
 
 end
