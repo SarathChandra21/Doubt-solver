@@ -7,7 +7,7 @@ class TeachersController < ApplicationController
     end
 
     def index
-        @teachers = Teacher.paginate(page: params[:page], per_page: 2)
+        @teachers = Teacher.paginate(page: params[:page], per_page: 3)
     end
 
     def new

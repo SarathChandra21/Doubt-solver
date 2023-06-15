@@ -6,6 +6,7 @@
 
 <div class="container">
     <% @teachers.each do |teacher| %>
+        <% if teacher.name != 'ramesh' %>
         <div class="row justify-content-md-center">
             <div class="col-8 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
@@ -29,6 +30,7 @@
                 </div>
             </div>
         </div>
+        <% end %>
     <% end%>
 </div>
 

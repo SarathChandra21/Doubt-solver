@@ -1,5 +1,20 @@
 <div class="container" id="home-container">
     <div class="row">
+        <div class="col-6 mt-4">
+            <h3>Total registered students   : <%= Student.count %></h3>
+            <h3>Total registered teachers   : <%= Teacher.count %></h3>
+            <h3>Total topics created        : <%= Topic.count %></h3>
+            <h3>Number of questions asked   : <%= Question.count %></h3>
+            <h3>Number of questions answered: <%= Question.where.not(ans:nil).count %></h3>
+            <h3>Number of questions unanswered: <%= Question.where(ans:nil).count %></h3>
+        </div>
+        <div class="col-6">
+        <div class="mt-4 text-center">
+            <%= image_tag("dashboard.jpg", class: "rounded mx-auto d-block center", :size => "360x280")%>
+        </div> 
+        </div>
+    </div>
+    <div class="row mt-5">
         <div class="col-6 text-center">
             <h3>Statistics of students registered</h3>
             <%= line_chart Student.group_by_day(:created_at).count %>
