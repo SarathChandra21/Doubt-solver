@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
     before_action :set_question, only: [:show,:edit,:update,:destroy]
-    before_action :require_student, except: [:show, :index, :edit, :update]
+    before_action :require_student, except: [:show, :index, :edit, :update, :unanswered]
     before_action :require_teacher, only: [:edit,:update]
     before_action :require_same_student, only: [ :destroy]
     def show
@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
         if session[:student_id]
            @questions = Question.where(student_id:session[:student_id]).paginate(page: params[:page], per_page: 3)
         else
-            flash[:alert] = "You have to login to view your questions"
+            flash[:alert] = "You have to login as student to view your questions"
             redirect_to login_path
         end
     end
@@ -22,6 +22,14 @@ class QuestionsController < ApplicationController
         @questions = Question.where("que LIKE ?","%#{keyword}%").paginate(page: params[:page], per_page: 3)
         respond_to do |format|
             format.html { render 'index' } 
+        end
+    end
+    def unanswered
+        if logged_in_as_teacher?
+            @questions = Question.where(ans: nil).paginate(page: params[:page], per_page: 3)
+        else
+            flash[:alert] = "You have to login as teacher to view unanswered questions"
+            redirect_to login2_path
         end
     end
     def create

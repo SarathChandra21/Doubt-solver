@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'myquestions', to: 'questions#index1'
+  get 'unanswered', to: 'questions#unanswered'
   get 'login2', to: 'sessions#new2'
   post 'login2', to: 'sessions#create2'
   delete 'logout2', to: 'sessions#destroy2'
