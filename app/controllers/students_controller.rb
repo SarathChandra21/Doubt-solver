@@ -3,11 +3,11 @@ class StudentsController < ApplicationController
     before_action :require_student, only: [:edit, :update]
     before_action :require_same_student, only: [:edit, :update, :destroy]
     def show
-        @questions = @student.questions.paginate(page: params[:page], per_page: 2)
+        @questions = @student.questions.paginate(page: params[:page], per_page: 3)
     end
 
     def index
-        @students = Student.paginate(page: params[:page], per_page: 2)
+        @students = Student.paginate(page: params[:page], per_page: 3)
     end
 
     def new

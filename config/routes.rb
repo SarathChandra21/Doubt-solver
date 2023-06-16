@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   resources :topics, except: [:destroy]
   get 'dashboard', to: "pages#stats"
   get 'pages/update', to: 'pages#update'
-  
+  post 'questions/index2', to: 'questions#index2'
 
 end

@@ -2,6 +2,10 @@ var followButton = document.getElementById('follow-btn');
 
 if (followButton.innerText == 'Follow') {
   followButton.innerText = 'Unfollow';
+  followButton.classList.remove('btn-primary');
+  followButton.classList.add('btn-dark');
 } else {
   followButton.innerText = 'Follow';
+  followButton.classList.remove('btn-dark');
+  followButton.classList.add('btn-primary');
 }

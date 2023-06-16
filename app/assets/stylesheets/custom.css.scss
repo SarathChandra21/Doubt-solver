@@ -5,11 +5,18 @@
     background-color: #105b6b !important;
     
 }
-
+.no-underline {
+    text-decoration: none;
+  }
+  
+  .no-underline:hover {
+    text-decoration: none;
+  }
+  
 .nav-link{
     color: white !important;
 }
-.card{
+.card.question{
     height: 350px !important;
 }
 

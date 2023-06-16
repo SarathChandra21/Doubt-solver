@@ -9,9 +9,15 @@
             <h3>Number of questions unanswered: <%= Question.where(ans:nil).count %></h3>
         </div>
         <div class="col-6">
-        <div class="mt-4 text-center">
-            <%= image_tag("dashboard.jpg", class: "rounded mx-auto d-block center", :size => "360x280")%>
-        </div> 
+            <div class="mt-4 text-center">
+                <%= image_tag("dashboard.jpg", class: "rounded mx-auto d-block center", :size => "360x280")%>
+            </div> 
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h3>Topic wise questions asked</h3>
+            <%= pie_chart Topic.joins(:question_topics).group(:name).count %>
         </div>
     </div>
     <div class="row mt-5">
@@ -37,12 +43,7 @@
         </div>
 
     </div>
-    <div class="row mt-5">
-        <div class="col-12 text-center">
-            <h3>Topic wise questions asked</h3>
-            <%= pie_chart Topic.joins(:question_topics).group(:name).count %>
-        </div>
-    </div>
+    
     
     
 </div>

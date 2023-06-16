@@ -17,6 +17,13 @@ class QuestionsController < ApplicationController
             redirect_to login_path
         end
     end
+    def index2
+        keyword = params[:search]
+        @questions = Question.where("que LIKE ?","%#{keyword}%").paginate(page: params[:page], per_page: 3)
+        respond_to do |format|
+            format.html { render 'index' } 
+        end
+    end
     def create
         @question = Question.new(question_params)
         @question.student = current_student
@@ -27,7 +34,6 @@ class QuestionsController < ApplicationController
         else
             render 'new'
         end
-        
     end
     def edit
     end

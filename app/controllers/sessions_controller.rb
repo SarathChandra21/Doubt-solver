@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
     def new
+        if logged_in_as_student?
+            flash[:alert] = "You are already logged in"
+            redirect_to root_path
+        elsif logged_in_as_teacher?
+            flash[:alert] = "You are already logged in"
+            redirect_to root_path
+        end
     end
     def create
         student = Student.find_by(email: params[:session][:email].downcase)
@@ -19,6 +26,13 @@ class SessionsController < ApplicationController
         redirect_to root_path
     end
     def new2
+        if logged_in_as_student?
+            flash[:alert] = "You are already logged in"
+            redirect_to root_path
+        elsif logged_in_as_teacher?
+            flash[:alert] = "You are already logged in"
+            redirect_to root_path
+        end
     end
     def create2
         teacher = Teacher.find_by(email: params[:session][:email].downcase)
