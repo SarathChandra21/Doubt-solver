@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
     before_action :require_student, except: [:show, :index, :edit, :update, :unanswered, :index2]
     before_action :require_teacher, only: [:edit,:update]
     before_action :require_same_student, only: [ :destroy]
+    before_action :check_answer_present, only: [ :update]
     def show
        if !(logged_in_as_student? || logged_in_as_teacher?)
             flash[:alert] = "Login to view question briefly"
@@ -64,8 +65,7 @@ class QuestionsController < ApplicationController
     def new
         @question = Question.new
     end
-    def destroy
-        
+    def destroy 
         @question.destroy
         redirect_to questions_path
     end
@@ -89,6 +89,12 @@ class QuestionsController < ApplicationController
         if current_student != @question.student
             flash[:alert] = "You can only delete your own question"
             redirect_to @question
+        end
+    end
+    def check_answer_present
+        if !@question.ans.nil? && current_teacher.id != @question.teacher_id
+            flash[:alert] = "The question has already been answered by some other teacher. You can answer other questions."
+            redirect_to questions_path
         end
     end
 

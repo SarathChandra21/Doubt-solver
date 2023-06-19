@@ -1,4 +1,9 @@
+<% if logged_in_as_student? && current_student == @student %>
+<h1 class="text-center mt-4">Your profile</h1>
+<% else %>
 <h1 class="text-center mt-4"><%= @student.name%> profile</h1>
+<% end %>
+
 
 
 <% if logged_in_as_student? && current_student == @student %>

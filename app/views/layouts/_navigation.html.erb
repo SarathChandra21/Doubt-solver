@@ -6,7 +6,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item active ml-2">
         <% x = logged_in_as_student? ? "Feed" : "Home" %>
         <%= link_to x , root_path, class: "nav-link" %>
       </li>
@@ -105,7 +105,7 @@
     <% if logged_in_as_student? || logged_in_as_teacher? %> 
       <%= form_tag({ controller: "questions", action: "index2" }, method: "post", remote:true, class: "form-inline my-2 my-lg-0") do %>
         <%= text_field_tag(:search, nil, class: "form-control mr-sm-2", placeholder: "Search a question", aria: { label: "Search" }) %>
-        <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0", type: "submit") %>
+        <%= submit_tag("Search", class: "btn btn-outline-light my-2 my-sm-0", type: "submit") %>
       <% end %>
     <% end %>
   </div>

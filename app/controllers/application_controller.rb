@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
     helper_method :current_student, :logged_in_as_student? , :current_teacher, :logged_in_as_teacher?
 
     def current_student
-        
         @current_student ||= Student.find(session[:student_id]) if session[:student_id]
         
     end

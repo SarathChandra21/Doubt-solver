@@ -1,4 +1,9 @@
-<h1 class="text-center mt-4"><%= @teacher.name%> profile</h1>
+<% if logged_in_as_teacher? && current_teacher == @teacher %>
+    <h1 class="text-center mt-4">Your profile</h1>
+<% else %>
+    <h1 class="text-center mt-4"><%= @teacher.name%> profile</h1>
+<% end %>
+
 
 <% if logged_in_as_teacher? && current_teacher == @teacher %>
     <div class="text-center mt-4">
@@ -6,7 +11,7 @@
     </div>
 <% end %>
 
-<h3 class="text-center mt-4">Questions Solved</h3>
+<h3 class="text-center mt-4"> <%= @teacher.questions.count %> questions solved </h3>
 
 <div class="flickr_pagination">
     <%= will_paginate @questions, :container => false %>
