@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
     def new
-        if logged_in_as_student?
+        if !session[:student_id].nil? 
             flash[:alert] = "You are already logged in"
             redirect_to root_path
-        elsif logged_in_as_teacher?
-            flash[:alert] = "You are already logged in"
+        elsif !session[:teacher_id].nil?
+            flash[:alert] = "You are already logged in as teacher."
             redirect_to root_path
         end
     end
@@ -26,11 +26,11 @@ class SessionsController < ApplicationController
         redirect_to root_path
     end
     def new2
-        if logged_in_as_student?
+        if !session[:teacher_id].nil? 
             flash[:alert] = "You are already logged in"
             redirect_to root_path
-        elsif logged_in_as_teacher?
-            flash[:alert] = "You are already logged in"
+        elsif !session[:student_id].nil?
+            flash[:alert] = "You are already logged in as student"
             redirect_to root_path
         end
     end

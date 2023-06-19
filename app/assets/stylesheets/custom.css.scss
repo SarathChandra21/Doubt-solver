@@ -141,13 +141,13 @@ cursor: default; }
     font-weight: bold;
     color: #ff0084; }
 .flickr_pagination a {
-    border: 1px solid #dddddd;
-    color: whitesmoke;
+    border: none;
+    color: #105b6b;
     text-decoration: none; }
 .flickr_pagination a:hover, .flickr_pagination a:focus {
-border-color: gray;
+border-color: black;
 background: whitesmoke;
-color: gray; }
+color: black; }
 .flickr_pagination .page_info {
     color: #aaaaaa;
     padding-top: 0.8em; }

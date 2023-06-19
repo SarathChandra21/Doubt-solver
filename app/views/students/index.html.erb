@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row justify-content-md-center">
     <% @students.each do |student| %>
-            <div class="col-6 mt-4">
+            <div class="col-4 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
                     <div class="card-header font-italic">
                          <%= link_to student.name, student_path(student) %>
@@ -18,11 +18,10 @@
                         <%= link_to 'View profile', student_path(student), class: "btn btn-outline-success"%>
                         <% if logged_in_as_student? && (current_student == student || current_student.admin?)%>
                             <%= link_to 'Edit profile', edit_student_path(student), class: "btn btn-outline-info"%>
-                            <%= link_to 'Delete profile', student_path(student), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
                         <% end %>
                     </div>
                     <div class="card-footer text-muted">
-                        <small> joined <%=time_ago_in_words(student.created_at) %>ago,
+                        <small> joined <%=time_ago_in_words(student.created_at) %> ago,
                         updated <%=time_ago_in_words(student.updated_at)%> ago
                         </small>
                     </div>

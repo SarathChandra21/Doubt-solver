@@ -3,11 +3,11 @@ class StudentsController < ApplicationController
     before_action :require_student, only: [:edit, :update]
     before_action :require_same_student, only: [:edit, :update, :destroy]
     def show
-        @questions = @student.questions.paginate(page: params[:page], per_page: 3)
+        @questions = @student.questions.order('created_at DESC').paginate(page: params[:page], per_page: 4)
     end
 
     def index
-        @students = Student.paginate(page: params[:page], per_page: 3)
+        @students = Student.paginate(page: params[:page], per_page: 6)
     end
 
     def new
@@ -51,9 +51,9 @@ class StudentsController < ApplicationController
     end
 
     def set_student
-        if Student.where(id:params[:id]) == []
+        if logged_in_as_student? && Student.where(id:params[:id]) == []
             flash[:alert] = "Oops, the account was deleted."
-            redirect_to students_path
+            redirect_to root_path
         else
             @student = Student.find(params[:id])
         end

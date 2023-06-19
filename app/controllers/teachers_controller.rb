@@ -3,11 +3,11 @@ class TeachersController < ApplicationController
     before_action :require_teacher, only: [:edit, :update]
     before_action :require_same_teacher, only: [:edit, :update, :destroy]
     def show
-        @questions = @teacher.questions.paginate(page: params[:page], per_page: 2)
+        @questions = @teacher.questions.order('created_at DESC').paginate(page: params[:page], per_page: 4)
     end
 
     def index
-        @teachers = Teacher.paginate(page: params[:page], per_page: 3)
+        @teachers = Teacher.order('created_at DESC').paginate(page: params[:page], per_page: 6)
     end
 
     def new
@@ -15,7 +15,6 @@ class TeachersController < ApplicationController
     end
 
     def edit
-        
     end
 
     def update
@@ -53,7 +52,7 @@ class TeachersController < ApplicationController
     def set_teacher
         if Teacher.where(id:params[:id]) == []
             flash[:alert] = "Oops the account was deleted"
-            redirect_to teachers_path
+            redirect_to root_path
         else
             @teacher = Teacher.find(params[:id])
         end

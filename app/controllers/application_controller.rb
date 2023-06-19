@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_student, :logged_in_as_student? , :current_teacher, :logged_in_as_teacher?
 
     def current_student
+        
         @current_student ||= Student.find(session[:student_id]) if session[:student_id]
         
     end
@@ -11,7 +12,10 @@ class ApplicationController < ActionController::Base
     end
 
     def require_student
-        if !logged_in_as_student? 
+        if !logged_in_as_student? && logged_in_as_teacher?
+            flash[:alert] = "You are logged in as teacher. you can't do this action" 
+            redirect_to current_teacher
+        elsif !logged_in_as_student?
             flash[:alert] = "You must be logged in as student to perform that action"
             redirect_to login_path
         end
@@ -26,7 +30,11 @@ class ApplicationController < ActionController::Base
     end
 
     def require_teacher
-        if !logged_in_as_teacher? 
+        
+        if !logged_in_as_teacher? && logged_in_as_student?
+            flash[:alert] = "You are logged in as student. you can't do this action"  
+            redirect_to current_student
+        elsif !logged_in_as_teacher? 
             flash[:alert] = "You must be logged in as teacher to perform that action"
             redirect_to login2_path
         end

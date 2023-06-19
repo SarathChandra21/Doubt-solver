@@ -1,18 +1,30 @@
+
+<h1 class="text-center mt-4">Results matched</h1>
+
 <div class="container">
-    <div class="row justify-content-md-center">
+<div class="row justify-content-md-center">
     <% @questions.each do |question| %>
-        <% if !question.ans.nil? %>
-           
             <div class="col-6 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded question">
                     <div class="card-header font-italic">
                         Asked by  <%= question.student.name %>
-                        <% if !question.ans.nil? %>
+                        <% if !question.ans.nil? && question.teacher%> 
                                 & Solved by  <%= question.teacher.name %>
+                        <% end %>
+                        <% if !question.ans.nil? && !question.teacher%>
+                                & Solved by  Deleted User
+                        <% end %>
+                        <% if question.topics.any? %>
+                            <div class="mt-2"><%= render question.topics %></div>
                         <% end %>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><%= link_to question.que, question_path(question), class: "text-success" %></h5>
+                        <% if question.ans.nil? %>
+                            <h5 class="card-title"><%= link_to truncate(question.que, length: 80), question_path(question), class: "text-danger font-weight-bold" %></h5>
+                        <% else %>
+                            <h5 class="card-title"><%= link_to truncate(question.que, length: 80), question_path(question), class: "text-success font-weight-bold" %></h5>
+                        <% end %>
+                        <hr>
                         <p class="card-text">
                         <% if question.ans.nil? %>
                             Not answered yet!!
@@ -20,12 +32,13 @@
                             <%= truncate(question.ans, length: 100)%>
                         <% end %>
                         </p>
-                        <%= link_to 'View', question_path(question), class: "btn btn-outline-success"%>
+                        
+                        <%= link_to 'View briefly', question_path(question), class: "btn btn-outline-info"%>
                         <% if question.ans.nil? && logged_in_as_teacher? %>
-                            <%= link_to 'Answer it!', edit_question_path(question), class: "btn btn-outline-info"%>
+                            <%= link_to 'Answer it!', edit_question_path(question), class: "btn btn-outline-success"%>
                         <% end %>
                         <% if logged_in_as_student? && current_student == question.student %>
-                            <%= link_to 'Delete', question_path(question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
+                            <%= link_to 'Delete this question', question_path(question), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you Sure?"}%>
                         <% end %>
                     </div>
                     <% if question.ans.nil? %>
@@ -40,10 +53,15 @@
                 </div>
             </div>
         
-        <% end %>
     <% end%>
     </div>
 </div>
+
+
+
+
+
+
 
 
 
