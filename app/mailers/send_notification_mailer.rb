@@ -1,4 +1,5 @@
 class SendNotificationMailer < ApplicationMailer
+    include Rails.application.routes.url_helpers
     def send_email(question)
         @question = question
         @student = Student.find(@question.student_id)

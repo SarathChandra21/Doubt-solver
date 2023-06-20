@@ -9,10 +9,10 @@ class PagesController < ApplicationController
     def stats
     end
     def update
-        if StudentTopic.find_by(student_id: params[:s_id], topic_id: params[:t_id]).nil?
+        if params[:x1]=='Follow' && StudentTopic.find_by(student_id: params[:s_id], topic_id: params[:t_id]).nil?
             s = StudentTopic.new(student_id: params[:s_id], topic_id: params[:t_id])
             s.save
-        else
+        elsif params[:x1]=='Unfollow' && !StudentTopic.find_by(student_id: params[:s_id], topic_id: params[:t_id]).nil?
             StudentTopic.destroy_by(student_id: params[:s_id], topic_id: params[:t_id])
         end
 

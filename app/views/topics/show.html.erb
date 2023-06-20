@@ -10,7 +10,7 @@
     <div class="container text-center">
         <% x =  StudentTopic.find_by(student_id: current_student.id, topic_id: @topic.id).nil? ? "Follow" : "Unfollow"%>
         <% y =  StudentTopic.find_by(student_id: current_student.id, topic_id: @topic.id).nil? ? "btn-primary" : "btn-dark"%>
-        <%= link_to x, { controller: 'pages', action: 'update', remote: true, s_id: current_student.id, t_id: @topic.id }, class: "btn #{y}", id: "follow-btn" %>
+        <%= link_to x, { controller: 'pages', action: 'update', remote: true, s_id: current_student.id, t_id: @topic.id, x1: x }, class: "btn #{y}", id: "follow-btn" %>
     </div>
     
 <% end %>

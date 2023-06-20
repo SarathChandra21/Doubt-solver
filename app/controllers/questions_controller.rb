@@ -51,6 +51,7 @@ class QuestionsController < ApplicationController
     def edit
     end
     def update 
+        @domainforemail = request.host_with_port
         @question.teacher = current_teacher
         if @question.update(question_params)
             flash[:notice] = "Question solved Successfully"

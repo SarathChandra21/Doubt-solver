@@ -1,9 +1,6 @@
-<h1> Notification</h1>
-
-<h3> Hey <%=@student.name%> , Hope your doing well </h3>
-
-<p> Your question <em> <%= @question.que %>  </em> has been <strong> ANSWERED </strong> by teacher 
-<%= @teacher.name %>. Once please check it by visiting your doubt solving app </p>
+<h3> Hey <%=@student.name%> , Hope you are doing well. </h3>
+<p> Your question <h3 style="color: purple; "><%= @question.que %> </h3> has been <strong> <a href="http://localhost:3000/questions/<%= @question.id %>"> ANSWERED </a> </strong> by teacher 
+<%= @teacher.name %>. Once please check it by visiting our doubt solving app. </p>
 
 <br> 
 
